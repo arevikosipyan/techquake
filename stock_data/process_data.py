@@ -48,3 +48,21 @@ def extract_price_table(
     prices = prices.sort_index().dropna(how="all")
     
     return prices
+
+def compute_daily_returns(prices: pd.DataFrame) -> pd.DataFrame:
+    """
+    Compute daily percentage returns for each ticker.
+
+    Args:
+        prices (pd.DataFrame): Price table with Date index and tickers as columns.
+
+    Returns:
+        pd.DataFrame: Daily returns for each ticker as decimal values (for example, 0.01 means +1%).
+    """
+    # pct_change gives (P_t / P_{t-1}) - 1 for each day
+    returns = prices.pct_change()
+    
+    # Drop the first row, which contains NaN values
+    returns = returns.dropna(how="all")
+
+    return returns
