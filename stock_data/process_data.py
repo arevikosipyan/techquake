@@ -66,3 +66,29 @@ def compute_daily_returns(prices: pd.DataFrame) -> pd.DataFrame:
     returns = returns.dropna(how="all")
 
     return returns
+
+def compute_cumulative_returns(
+    returns: pd.DataFrame,
+    base: float = 100.0,
+) -> pd.DataFrame:
+    
+    """
+    Compute cumulative returns indexed to a starting value (for example, 100).
+
+    Args:
+        returns (pd.DataFrame): Daily returns for each ticker (for example, from compute_daily_returns).
+        base (float): Starting index level for the cumulative return.
+
+    Returns:
+        pd.DataFrame: Cumulative return index for each ticker.
+            Each column shows how an initial investment of `base` would grow over time.
+    """
+    
+    # (1 + r).cumprod() gives the growth factor over time
+    growth_factors = (1 + returns).cumprod()
+    
+    #Scale to the chosen base (for example, start at 100)
+    cumulative = base * growth_factors
+    
+    return cumulative
+    
