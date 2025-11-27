@@ -91,4 +91,29 @@ def compute_cumulative_returns(
     cumulative = base * growth_factors
     
     return cumulative
+
+def compute_rolling_volatility(
+    returns: pd.DataFrame,
+    window: int = 21,
+    trading_days_per_year: int = 252,
+) -> pd.DataFrame:
+    """
+    Compute annualized rolling volatility using daily returns.
+
+    Args:
+        returns (pd.DataFrame): Daily returns for each ticker.
+        window (int): Rolling window size in days (21 ≈ one trading month).
+        trading_days_per_year (int): Number of trading days per year, used to annualize the volatility.
+
+    Returns:
+        pd.DataFrame: Annualized rolling volatility for each ticker.
+    """
+    # Rolling standard deviation of daily returns over the chosen window
+    rolling_std = returns.rolling(window=window).std()
+    
+    # Annualize the volatility: multiply by sqrt(number of trading days per year)
+    annualized_vol = rolling_std * np.sqrt(trading_days_per_year)
+    
+    return annualized_vol
+
     
