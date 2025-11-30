@@ -23,19 +23,19 @@ and how high-growth vs. established firms differ in risk and resilience.
 
 ## Project Structure
 
+```
 techquake/
 │
 ├── stock_data/
-│   ├── fetch_data.py          # Downloads OHLCV price data via yfinance
-│   ├── process_data.py        # Computes returns, volatility, and drawdowns
-│   └── visualizations.py      # Plotting utility functions used in the notebook
-│
+│   ├── fetch_data.py         
+│   ├── process_data.py        
+│   └── visualizations.py      
 ├── presentation/
-│   └── techquake.ipynb        # Main analysis notebook (final project)
-│
-├── requirements.txt           # Dependencies
-└── README.md                  # Project overview and documentation
+│   └── techquake.ipynb        
+├── requirements.txt           
+└── README.md                  
 
+```
 ---
 
 ## Methodology
