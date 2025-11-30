@@ -15,7 +15,7 @@ The goal is to examine whether tech companies — from Apple to Spotify — expe
 
 ---
 
-## 1. Data and Universe
+## 1. Data
 
 All data comes from **Yahoo Finance** through the `yfinance` library.
 
@@ -35,14 +35,13 @@ The dataset covers **daily prices from 2018–01–01 to present**.
 
 ---
 
-## 2. Methods & Functions
+## 2. Functionality
 
 All core logic is implemented in the `stock_data` package.
 
 ### `stock_data.fetch_data`
 
-- `fetch_stock_data(...)`  
-  Downloads OHLCV data from Yahoo Finance for selected tickers.
+- `fetch_stock_data(...)` – downloads OHLCV data from Yahoo Finance for selected tickers.
 
 ### `stock_data.process_data`
 
@@ -116,7 +115,7 @@ Open the notebook:
 jupyter notebook presentation/techquake.ipynb
 ```
 
-## 5. Running the Analysis
+## 5. Analysis
 
 The notebook performs the full workflow:
 
