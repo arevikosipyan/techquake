@@ -87,7 +87,7 @@ def compute_cumulative_returns(
     # (1 + r).cumprod() gives the growth factor over time
     growth_factors = (1 + returns).cumprod()
     
-    #Scale to the chosen base (for example, start at 100)
+    # Scale to the chosen base (for example, start at 100)
     cumulative = base * growth_factors
     
     return cumulative
@@ -116,4 +116,22 @@ def compute_rolling_volatility(
     
     return annualized_vol
 
-    
+def compute_drawdowns(cumulative_returns: pd.DataFrame) -> pd.DataFrame:
+    """
+    Compute drawdowns as percentage decline from the running maximum.
+
+    Args:
+        cumulative_returns (pd.DataFrame): Cumulative return index for each ticker.
+
+    Returns:
+        pd.DataFrame: Drawdowns for each ticker.
+        Values are 0 at peaks and negative during declines
+        (for example, -0.3 means the stock is 30% below its peak).
+    """
+    # Running maximum of the cumulative return index
+    running_max = cumulative_returns.cummax()
+
+    # Drawdown is the percentage drop from the running maximum
+    drawdowns = (cumulative_returns - running_max) / running_max
+
+    return drawdowns
