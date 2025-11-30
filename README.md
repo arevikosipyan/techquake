@@ -89,7 +89,8 @@ techquake/
 │   ├── __init__.py
 │   ├── fetch_data.py         
 │   ├── process_data.py        
-│   └── visualizations.py             
+│   └── visualizations.py
+├── app.py             
 ├── LICENSE
 ├── README.md   
 └── requirements.txt                  

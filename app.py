@@ -16,8 +16,8 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
 # Import project functions
-from test_stock_data.fetch_stock_data import fetch_stock_data
-from test_stock_data.process_data import (
+from stock_data.fetch_data import fetch_stock_data
+from stock_data.process_data import (
     extract_price_table,
     compute_daily_returns,
     compute_cumulative_returns,
