@@ -16,16 +16,19 @@ def fetch_stock_data(
     Args:
         tickers (list): List of ticker symbols (for example, ["AAPL", "MSFT"]).
         start_date (str): Start date in 'YYYY-MM-DD' format. Defaults to '1995-01-01'.
-        end_date (str): End date in 'YYYY-MM-DD' format. Defaults to today's date
-            if not provided.
+        end_date (str): End date in 'YYYY-MM-DD' format. Defaults to today's date if not provided.
 
     Returns:
         pd.DataFrame: Historical price data for the requested tickers.
-        If an error occurs, an empty DataFrame is returned.
+        Returns an empty DataFrame if no data is found or an error occurs.
     """
     # If the user does not specify the end date, use today's date
     if end_date is None:
         end_date = datetime.today().strftime("%Y-%m-%d")
+    # Check that tickers list is not empty
+    if not tickers:
+        print("No tickers provided. Please pass at least one symbol.")
+        return pd.DataFrame()
 
     try:
         # Download historical price data from Yahoo Finance
