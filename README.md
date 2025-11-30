@@ -1,8 +1,27 @@
 # TechQuake  
-### Analyzing the Behavior of Major Tech Stocks During Market Shocks (2018–2024)
+### Behavior of Major Tech Stocks During Market Shocks (2018–2024)
 
-This project examines how major technology companies responded to recent market stress events — including the **COVID-19 crash** and the **2022 inflation-driven selloff**.  
-Using historical daily price data, the analysis compares:
+Are major tech stocks becoming more volatile as markets cycle through crises like COVID-19 and the 2022 inflation shock?  
+Do high-growth names react differently to stress than established megacaps?
+
+This project uses market data from **Yahoo Finance** to quantify how large technology companies behave during periods of turbulence.  
+Rather than guessing which stocks are “safe” or “risky,” the analysis measures:
+
+- **Cumulative performance** (long-term growth)  
+- **Rolling volatility** (short-term instability)  
+- **Drawdowns** (declines from previous peaks)
+
+The goal is to examine whether tech companies — from Apple to Spotify — experience market shocks in similar or fundamentally different ways.
+
+---
+
+## 1. Data and Universe
+
+All data comes from **Yahoo Finance** through the `yfinance` library.
+
+### Tech stocks analyzed
+
+The project focuses on five technology-related companies with different business models and risk profiles:
 
 - **AAPL** — Apple  
 - **MSFT** — Microsoft  
@@ -10,18 +29,58 @@ Using historical daily price data, the analysis compares:
 - **AMZN** — Amazon  
 - **SPOT** — Spotify  
 
-It focuses on three core dimensions of stock behavior:
+These names span the spectrum from megacap “safe” tech (AAPL, MSFT) to high-growth semiconductors (NVDA) to consumer-facing platforms (AMZN, SPOT).
 
-1. **Cumulative performance** (long-term growth)  
-2. **Rolling volatility** (short-term risk)  
-3. **Drawdowns** (declines from previous peaks)
-
-The goal is to understand whether large tech companies behave similarly during market shocks,  
-and how high-growth vs. established firms differ in risk and resilience.
+The dataset covers **daily prices from 2018–01–01 to present**.
 
 ---
 
-## Project Structure
+## 2. Methods & Functions
+
+All core logic is implemented in the `stock_data` package.
+
+### `stock_data.fetch_data`
+
+- `fetch_stock_data(...)`  
+  Downloads OHLCV data from Yahoo Finance for selected tickers.
+
+### `stock_data.process_data`
+
+- `extract_price_table(...)` — isolate closing prices  
+- `compute_daily_returns(...)` — compute day-over-day % returns  
+- `compute_cumulative_returns(...)` — build cumulative index (base=100)  
+- `compute_rolling_volatility(...)` — 21-day annualised volatility  
+- `compute_drawdowns(...)` — running-maximum drawdowns
+
+### `stock_data.visualizations`
+
+Uses `matplotlib` for clean plotting:
+
+- `plot_cumulative_returns(...)`  
+- `plot_stock_comparison(...)`  
+- `plot_volatility_with_events(...)`  
+
+Events highlighted:
+
+- **2020-03-16** — COVID-19 crash  
+- **2022-06-13** — Inflation-driven tech selloff  
+
+### Notebook
+
+The full narrative analysis is in: presentation/techquake.ipynb
+
+It performs the complete workflow:
+
+1. Download data  
+2. Clean prices and compute returns  
+3. Calculate cumulative performance  
+4. Compute and visualize rolling volatility  
+5. Compute and analyze drawdowns  
+6. Interpret results in context of market shocks  
+
+---
+
+## 3. Project Structure
 
 ```
 techquake/
@@ -38,84 +97,73 @@ techquake/
 ```
 ---
 
-## Methodology
+## 4. Installation
 
-### **1. Data Collection**
-Historical price data is downloaded from Yahoo Finance using `yfinance`.  
-The project uses daily **OHLCV** data (Open/High/Low/Close/Volume),  
-but analysis focuses on **closing prices**.
-
-### **2. Data Processing**
-The following transformations are applied:
-
-- Clean and extract price tables  
-- Compute **daily returns**  
-- Build **cumulative return indices** (indexed to 100)  
-- Compute **21-day rolling volatility**  
-- Compute **drawdowns** (decline from running peaks)
-
-### **3. Visualization**
-Custom plotting functions highlight:
-
-- How stock performance diverges over time  
-- How volatility spikes during crises  
-- How deeply each stock fell during stress periods  
-
-Major events highlighted in the analysis include:
-
-- **2020-03-16 — COVID-19 crash**  
-- **2022-06-13 — Inflation-driven market selloff**
-
----
-
-## Key Findings
-
-### **1. Performance Divergence**
-- NVDA shows explosive long-term growth but also deeper downturns.  
-- AAPL and MSFT show slow, steady compounding — the most resilient performers.  
-- SPOT displays the weakest long-term trend with large fluctuations.
-
-### **2. Volatility Behavior**
-- All stocks show sharp volatility spikes during COVID-19 and mid-2022.  
-- NVDA and AMZN experience the largest jumps in volatility.  
-- AAPL and MSFT remain relatively stable even under stress.  
-- SPOT shows sustained high volatility due to a younger, less diversified business model.
-
-### **3. Drawdown Analysis**
-- **SPOT** had the deepest maximum drawdown (~80%).  
-- **NVDA** experienced large drawdowns but recovered faster.  
-- **AAPL** and **MSFT** had the smallest, shortest drawdowns — the “safe havens” of tech.  
-- **AMZN** lies in between: significant declines but less extreme than SPOT.
-
----
-
-## Why This Analysis Matters
-
-This project helps illustrate how different categories of tech companies behave during crises:
-
-- **Investors** can identify which tech stocks maintain stability under pressure.  
-- **Analysts** can compare risk profiles between high-growth and megacap firms.  
-- **Students** can learn key financial concepts: returns, volatility, drawdowns, and market shocks.  
-- **Researchers** can build upon the modular code for further quantitative analysis.
-
----
-
-## How to Run the Project
-
-Clone the repository:
+### Clone the repository
 
 ```bash
 git clone https://github.com/arevikosipyan/techquake.git
 cd techquake
 
-Install Dependencies: 
+Install dependencies:
 
+```bash
 pip install -r requirements.txt
 
-Open the notebook:
-
+Open the notebook
+```bash
 jupyter notebook presentation/techquake.ipynb
 
-License
+## 5. Running the Analysis
 
-This project is licensed under the MIT License.
+The notebook performs the full workflow:
+
+- Downloads historical OHLCV data  
+- Extracts and cleans closing prices  
+- Computes returns and cumulative indices  
+- Computes rolling volatility and drawdowns  
+- Visualizes performance and risk under market stress  
+
+Each figure includes an explanation of what the chart reveals.
+
+---
+
+## 6. Key Findings
+
+### 1. Long-Term Performance
+- NVDA shows the strongest growth but also the largest swings.  
+- AAPL and MSFT show steady compounding with limited instability.  
+- SPOT performs weakest, with high volatility and limited long-term growth.
+
+### 2. Volatility Behavior
+- All stocks show volatility spikes during March 2020 and mid-2022.  
+- NVDA and AMZN exhibit the largest volatility jumps.  
+- AAPL and MSFT remain the most stable.  
+- SPOT stays elevated for prolonged periods.
+
+### 3. Drawdowns
+- SPOT experiences the deepest maximum drawdown (~80%).  
+- NVDA shows deep declines but recovers quickly.  
+- AAPL and MSFT have the smallest drawdowns.  
+- AMZN sits in the middle with moderate but persistent declines.
+
+---
+
+## 7. Why This Analysis Matters
+
+This project is useful for:
+
+- **Investors** — assessing resilience of different tech stocks  
+- **Students** — understanding volatility, returns, drawdowns, crisis behavior  
+- **Analysts** — comparing risk between high-growth and megacap firms  
+- **Researchers** — using the modular code for extended analysis  
+
+It highlights that tech companies do **not** respond uniformly to market shocks.
+
+---
+
+8. Limitations
+- Uses daily data from 2018 onward
+- No valuation or fundamental metrics included
+- Analysis is descriptive, not predictive
+- This is not investment advice
