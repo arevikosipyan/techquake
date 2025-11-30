@@ -1,5 +1,5 @@
 # TechQuake  
-### Behavior of Major Tech Stocks During Market Shocks (2018–2024)
+### Behavior of Major Tech Stocks During Market Shocks
 
 Are major tech stocks becoming more volatile as markets cycle through crises like COVID-19 and the 2022 inflation shock?  
 Do high-growth names react differently to stress than established megacaps?
@@ -84,15 +84,16 @@ It performs the complete workflow:
 
 ```
 techquake/
-│
+├── presentation/
+│   └── techquake.ipynb 
 ├── stock_data/
+│   ├── __init__.py
 │   ├── fetch_data.py         
 │   ├── process_data.py        
-│   └── visualizations.py      
-├── presentation/
-│   └── techquake.ipynb        
-├── requirements.txt           
-└── README.md                  
+│   └── visualizations.py             
+├── LICENSE
+├── README.md   
+└── requirements.txt                  
 
 ```
 ---
@@ -104,15 +105,16 @@ techquake/
 ```bash
 git clone https://github.com/arevikosipyan/techquake.git
 cd techquake
-
+```
 Install dependencies:
 
 ```bash
 pip install -r requirements.txt
-
-Open the notebook
+```
+Open the notebook:
 ```bash
 jupyter notebook presentation/techquake.ipynb
+```
 
 ## 5. Running the Analysis
 
@@ -162,7 +164,8 @@ It highlights that tech companies do **not** respond uniformly to market shocks.
 
 ---
 
-8. Limitations
+## 8. Limitations
+
 - Uses daily data from 2018 onward
 - No valuation or fundamental metrics included
 - Analysis is descriptive, not predictive
