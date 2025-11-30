@@ -170,3 +170,18 @@ It highlights that tech companies do **not** respond uniformly to market shocks.
 - No valuation or fundamental metrics included
 - Analysis is descriptive, not predictive
 - This is not investment advice
+
+---
+
+## 9. Streamlit Dashboard
+
+You can explore drawdowns interactively using the Streamlit app:
+
+```bash
+streamlit run app.py
+```
+The app lets you:
+
+- Select any of the five tech tickers (AAPL, MSFT, NVDA, AMZN, SPOT)
+- Choose a start and end date for analysis
+- Automatically download historical price data for the chosen period
