@@ -71,3 +71,41 @@ def plot_volatility_with_events(rolling_volatility: pd.DataFrame, event_dates: d
     
     # Show the plot
     plt.show()
+    
+def plot_stock_comparison(
+    cumulative_returns: pd.DataFrame,
+    tickers: list,
+    figsize=(12, 6),
+):
+    """
+    Plot cumulative returns for a selected subset of stocks.
+
+    Args:
+        cumulative_returns (pd.DataFrame): Cumulative return index for each ticker.
+        tickers (list): List of ticker symbols to include in the plot.
+        figsize (tuple): Size of the figure for the plot (default is (12, 6)).
+
+    Returns:
+        None
+    """
+    # Plot cumulative returns for the selected tickers
+    cumulative_returns[tickers].plot(
+        figsize=figsize,
+        title="Stock Performance Comparison",
+    )
+
+    # Set labels for x and y axes
+    plt.xlabel("Date")
+    plt.ylabel("Cumulative Returns")
+
+    # Display grid for better readability
+    plt.grid(True)
+
+    # Rotate x-axis labels for better legibility
+    plt.xticks(rotation=45, ha="right")
+
+    # Adjust layout to avoid overlapping labels
+    plt.tight_layout()
+
+    # Show the plot
+    plt.show()
